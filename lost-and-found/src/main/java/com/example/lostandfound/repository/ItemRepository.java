@@ -15,12 +15,4 @@ public interface ItemRepository {
     Item insert(Item item);
 
     Item update(Item item);
-
-    Optional<Item> findById(UUID itemId);
-
-    Optional<Item> findByName(String itemName);
-
-    List<Item> findByCategory(Category category);
-
-    void deleteAll();
 }
