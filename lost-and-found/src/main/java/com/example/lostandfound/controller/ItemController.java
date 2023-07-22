@@ -1,5 +1,6 @@
 package com.example.lostandfound.controller;
 
+import com.example.lostandfound.model.Status;
 import com.example.lostandfound.service.FoundService;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -44,5 +45,11 @@ public class ItemController {
         var items = itemService.findById(itemId);
         model.addAttribute("items", items);
         return "redirect:/item-detail";
+    }
+
+    @GetMapping("/items/{itemId}")
+    public String updateItemStatus(@PathVariable int itemId, Status status, Model model) {
+        var items = itemService.updateItemStatus(itemId,status);
+        return "redirect:/items";
     }
 }
