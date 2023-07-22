@@ -8,26 +8,23 @@ public class Item {
     private Category category;
     private final String foundPlace;
     private final String description;
-    private final Status status;
     private final LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public Item(String itemName, Category category, String foundPlace, String description,Status status) {
+    public Item(String itemName, Category category, String foundPlace, String description) {
         this.itemName = itemName;
         this.category = category;
         this.foundPlace = foundPlace;
         this.description = description;
-        this.status = status;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
 
-    public Item(String itemName, Category category, String foundPlace, String description,Status status,LocalDateTime createdAt,LocalDateTime updatedAt) {
+    public Item(String itemName, Category category, String foundPlace, String description,LocalDateTime createdAt,LocalDateTime updatedAt) {
         this.itemName = itemName;
         this.category = category;
         this.foundPlace = foundPlace;
         this.description = description;
-        this.status = status;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }

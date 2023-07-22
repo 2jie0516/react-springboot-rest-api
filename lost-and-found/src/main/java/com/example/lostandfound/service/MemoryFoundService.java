@@ -34,9 +34,4 @@ public class MemoryFoundService implements FoundService{
     public Item findById(int itemId) {
         return itemRepository.findById(itemId);
     }
-
-    @Override
-    public void updateItemStatus(int itemId, Status status) {
-        itemRepository.update(itemId,status);
-    }
 }

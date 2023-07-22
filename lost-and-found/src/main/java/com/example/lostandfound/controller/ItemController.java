@@ -46,10 +46,4 @@ public class ItemController {
         model.addAttribute("items", items);
         return "redirect:/item-detail";
     }
-
-    @GetMapping("/items/{itemId}")
-    public String updateItemStatus(@PathVariable int itemId, Status status, Model model) {
-        itemService.updateItemStatus(itemId,status);
-        return "redirect:/items";
-    }
 }
