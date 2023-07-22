@@ -9,11 +9,11 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 
-  <title>Grids & Circles</title>
+  <title>분실물 목록</title>
 </head>
 <body class="container-fluid">
-<h1>Grids & Circles</h1>
-<h2>Production Management</h2>
+<h1>분실물 목록</h1>
+<h2>분실물들을 보관 중입니다.</h2>
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
   <a th:href="@{/new-item}" class="btn btn-primary me-md-2" type="button">Add Item</a>
 </div>
@@ -24,8 +24,7 @@
     <th scope="col">Category</th>
     <th scope="col">Place</th>
     <th scope="col">Description</th>
-    <th scope="col">CreatedAt</th>
-    <th scope="col">UpdatedAt</th>
+    <th scope="col">습득 시간</th>
   </tr>
   </thead>
   <tbody>
@@ -35,7 +34,6 @@
     <td th:text="*{foundPlace}"></td>
     <td th:text="*{description}"></td>
     <td th:text="*{createdAt}"></td>
-    <td th:text="*{updatedAt}"></td>
   </tr>
   </tbody>
 </table>
