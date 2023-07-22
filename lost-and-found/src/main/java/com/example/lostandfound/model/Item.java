@@ -22,6 +22,16 @@ public class Item {
         this.updatedAt = LocalDateTime.now();
     }
 
+    public Item(UUID itemId, String itemName, Category category, String foundPlace, String description,LocalDateTime createdAt,LocalDateTime updatedAt) {
+        this.itemId = itemId;
+        this.itemName = itemName;
+        this.category = category;
+        this.foundPlace = foundPlace;
+        this.description = description;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
     public UUID getItemId() {
         return itemId;
     }
