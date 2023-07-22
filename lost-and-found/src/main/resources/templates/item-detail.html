@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+  <title>Grids & Circles</title>
+</head>
+<body class="container-fluid">
+<h1>Grids & Circles</h1>
+<h2>Production Management</h2>
+<form th:action="@{/items}" method="post">
+  <div class="mb-3">
+    <label for="itemName" class="form-label">Name</label>
+    <input type="text" class="form-control" id="itemName" name="itemName">
+  </div>
+  <div class="mb-3">
+    <label for="category" class="form-label">Category</label>
+    <select id="category" name="category" class="form-select">
+      <option selected>Open this select menu</option>
+      <option value="ELECTRONICS">전자기기</option>
+      <option value="WALLET">지갑</option>
+      <option value="CLOTHES">의류</option>
+      <option value="UMBRELLA">우산</option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label for="place" class="form-label">Place</label>
+    <input type="text" class="form-control" id="place" name="place">
+  </div>
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</body>
+</html>
