@@ -3,11 +3,13 @@ package com.example.lostandfound.service;
 import com.example.lostandfound.model.Category;
 import com.example.lostandfound.model.Item;
 import com.example.lostandfound.repository.ItemRepository;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+@Component
 public class MemoryFoundService implements FoundService{
     private final ItemRepository itemRepository;
 
