@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -36,5 +37,12 @@ public class ItemController {
                 createItemRequest.place(),
                 createItemRequest.description());
         return "redirect:/items";
+    }
+
+    @GetMapping("/items/{itemId}")
+    public String findItemDetail(@PathVariable int itemId, Model model) {
+        var items = itemService.findById();
+        model.addAttribute("items", items);
+        return "redirect:/item-detail";
     }
 }
