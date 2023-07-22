@@ -18,7 +18,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Component
-public class JdbcItemRepository implements ItemRepository{
+public class JdbcItemRepository implements ItemRepository {
 
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
@@ -63,6 +63,19 @@ public class JdbcItemRepository implements ItemRepository{
         }
         return item;
     }
+
+    @Override
+    public Item findById(int itemId) {
+        String findSql = new SqlBuilder
+                .SelectBuilder()
+                .select("*")
+                .from("item")
+                .where("itemId = :item_id")
+                .build();
+
+        return jdbcTemplate.queryForObject(findSql, Collections.singletonMap("itemId", itemId), itemRowMapper);
+    }
+
 
     private static final RowMapper<Item> itemRowMapper = (resultSet, i) -> {
         var itemName = resultSet.getString("item_name");

@@ -15,4 +15,5 @@ public interface ItemRepository {
     Item insert(Item item);
 
     Item update(Item item);
+    Item findById(int itemId);
 }

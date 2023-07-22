@@ -9,4 +9,5 @@ import java.util.List;
 public interface FoundService {
     List<Item> getAllItem();
     Item createItem(String itemName,Category category,String place,String description);
+    Item findById(int itemId);
 }

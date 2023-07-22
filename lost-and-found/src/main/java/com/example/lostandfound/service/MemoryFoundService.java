@@ -25,7 +25,12 @@ public class MemoryFoundService implements FoundService{
 
     @Override
     public Item createItem(String itemName, Category category, String place, String description) {
-        var product = new Item(itemName, category, place, description);
-        return itemRepository.insert(product);
+        var item = new Item(itemName, category, place, description);
+        return itemRepository.insert(item);
+    }
+
+    @Override
+    public Item findById(int itemId) {
+        return itemRepository.findById(itemId);
     }
 }

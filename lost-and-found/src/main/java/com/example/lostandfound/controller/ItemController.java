@@ -41,7 +41,7 @@ public class ItemController {
 
     @GetMapping("/items/{itemId}")
     public String findItemDetail(@PathVariable int itemId, Model model) {
-        var items = itemService.findById();
+        var items = itemService.findById(itemId);
         model.addAttribute("items", items);
         return "redirect:/item-detail";
     }
