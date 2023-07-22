@@ -33,8 +33,14 @@ public class JdbcItemRepository implements ItemRepository{
 
     @Override
     public Item insert(Item item) {
-        var update = jdbcTemplate.update("INSERT INTO item(item_name, category, found_place, description, created_at, updated_at)" +
-                " VALUES ( :itemName, :category, :place, :description, :createdAt, :updatedAt)", toParamMap(item));
+        String insertSql = new SqlBuilder
+                .InsertBuilder()
+                .insert("item")
+                .columns("item_name", "category", "found_place", "description", "created_at", "updated_at")
+                .values(":itemName", ":category", ":place", ":description", ":createdAt", ":updatedAt").build();
+
+        var update = jdbcTemplate.update(insertSql, toParamMap(item));
+
         if (update != 1) {
             throw new RuntimeException("Noting was inserted");
         }
@@ -43,53 +49,19 @@ public class JdbcItemRepository implements ItemRepository{
 
     @Override
     public Item update(Item item) {
-        var update = jdbcTemplate.update(
-                "UPDATE item SET item_name = :itemName, category = :category, place = :place, description = :description, created_at = :createdAt, updated_at = :updatedAt" +
-                        " WHERE item_id = UUID_TO_BIN(:itemId)",
-                toParamMap(item)
-        );
+        String updateSql = new SqlBuilder
+                .UpdateBuilder()
+                .update("item")
+                .set("description = :description")
+                .where("item_number = itemNumber")
+                .build();
+
+        var update = jdbcTemplate.update(updateSql, toParamMap(item));
 
         if (update != 1) {
             throw new RuntimeException("Nothing was updated");
         }
         return item;
-    }
-    @Override
-    public Optional<Item> findById(UUID itemId) {
-        try {
-            return Optional.ofNullable(
-                    jdbcTemplate.queryForObject("SELECT * FROM item WHERE item_id = UUID_TO_BIN(:itemId)",
-                            Collections.singletonMap("productId", itemId.toString().getBytes()), itemRowMapper)
-            );
-        } catch (EmptyResultDataAccessException e) {
-            return Optional.empty();
-        }
-    }
-
-    @Override
-    public Optional<Item> findByName(String itemName) {
-        try {
-            return Optional.ofNullable(
-                    jdbcTemplate.queryForObject("SELECT * FROM item WHERE product_name = :itemName",
-                            Collections.singletonMap("itemName", itemName), itemRowMapper)
-            );
-        } catch (EmptyResultDataAccessException e) {
-            return Optional.empty();
-        }
-    }
-
-    @Override
-    public List<Item> findByCategory(Category category) {
-        return jdbcTemplate.query(
-                "SELECT * FROM item WHERE category = :category",
-                Collections.singletonMap("category", category.toString()),
-                itemRowMapper
-        );
-    }
-
-    @Override
-    public void deleteAll() {
-        jdbcTemplate.update("DELETE FROM products", Collections.emptyMap());
     }
 
     private static final RowMapper<Item> itemRowMapper = (resultSet, i) -> {
