@@ -2,6 +2,7 @@ package com.example.lostandfound.repository;
 
 import com.example.lostandfound.model.Category;
 import com.example.lostandfound.model.Item;
+import com.example.lostandfound.model.Status;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,6 +15,6 @@ public interface ItemRepository {
 
     Item insert(Item item);
 
-    Item update(Item item);
+    void update(int itemId, Status status);
     Item findById(int itemId);
 }

@@ -2,6 +2,8 @@ package com.example.lostandfound.repository;
 
 import com.example.lostandfound.model.Category;
 import com.example.lostandfound.model.Item;
+import com.example.lostandfound.model.Status;
+import org.h2.security.auth.impl.StaticUserCredentialsValidator;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -48,20 +50,19 @@ public class JdbcItemRepository implements ItemRepository {
     }
 
     @Override
-    public Item update(Item item) {
+    public void update(int itemId, Status status) {
         String updateSql = new SqlBuilder
                 .UpdateBuilder()
                 .update("item")
-                .set("description = :description")
-                .where("item_number = itemNumber")
+                .set("status = :status")
+                .where("item_id = itemNumber")
                 .build();
 
-        var update = jdbcTemplate.update(updateSql, toParamMap(item));
+        var update = jdbcTemplate.update(updateSql, toStatusParamMap(itemId,status));
 
         if (update != 1) {
             throw new RuntimeException("Nothing was updated");
         }
-        return item;
     }
 
     @Override
@@ -82,9 +83,10 @@ public class JdbcItemRepository implements ItemRepository {
         var category = Category.valueOf(resultSet.getString("category"));
         var place = resultSet.getString("found_place");
         var description = resultSet.getString("description");
+        var status = Status.valueOf(resultSet.getString("status"));
         var createdAt = toLocalDateTime(resultSet.getTimestamp("created_at"));
         var updatedAt = toLocalDateTime(resultSet.getTimestamp("updated_at"));
-        return new Item(itemName, category, place, description, createdAt, updatedAt);
+        return new Item(itemName, category, place, description,status, createdAt, updatedAt);
     };
 
     private Map<String, Object> toParamMap(Item item) {
@@ -93,8 +95,16 @@ public class JdbcItemRepository implements ItemRepository {
         paramMap.put("category", item.getCategory().toString());
         paramMap.put("place", item.getFoundPlace());
         paramMap.put("description", item.getDescription());
+        paramMap.put("itemName", item.getItemName());
         paramMap.put("createdAt", item.getCreatedAt());
         paramMap.put("updatedAt", item.getUpdatedAt());
+        return paramMap;
+    }
+
+    private Map<String, Object> toStatusParamMap(int itemId,Status status) {
+        var paramMap = new HashMap<String, Object>();
+        paramMap.put("item_id", itemId);
+        paramMap.put("status", status.toString());
         return paramMap;
     }
 

@@ -49,7 +49,7 @@ public class ItemController {
 
     @GetMapping("/items/{itemId}")
     public String updateItemStatus(@PathVariable int itemId, Status status, Model model) {
-        var items = itemService.updateItemStatus(itemId,status);
+        itemService.updateItemStatus(itemId,status);
         return "redirect:/items";
     }
 }
