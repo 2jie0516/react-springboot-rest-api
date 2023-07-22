@@ -30,7 +30,6 @@
   </thead>
   <tbody>
   <tr th:each="item: ${items}" th:object="${item}">
-    <td><a th:href="@{/items}" th:text="*{itemName}"></a></td>
     <td th:text="*{itemName}"></td>
     <td th:text="*{category}"></td>
     <td th:text="*{foundPlace}"></td>
