@@ -2,23 +2,31 @@ package com.example.lostandfound.service;
 
 import com.example.lostandfound.model.Category;
 import com.example.lostandfound.model.Item;
+import com.example.lostandfound.repository.ItemRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 public class MemoryFoundService implements FoundService{
-    private final ProductRepository productRepository;
+    private final ItemRepository itemRepository;
+
+    public MemoryFoundService(ItemRepository itemRepository) {
+        this.itemRepository = itemRepository;
+    }
     @Override
     public List<Item> getItemsByCategory(Category category) {
-        return null;
+        return itemRepository.findByCategory(category);
     }
 
     @Override
     public List<Item> getAllItem() {
-        return null;
+        return itemRepository.findAll();
     }
 
     @Override
     public Item createItem(String itemName, Category category, String place, String description) {
-        return null;
+        var product = new Item(UUID.randomUUID(), itemName, category, place, description);
+        return itemRepository.insert(product);
     }
 }
