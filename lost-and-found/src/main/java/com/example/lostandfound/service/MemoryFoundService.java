@@ -17,10 +17,6 @@ public class MemoryFoundService implements FoundService{
     public MemoryFoundService(ItemRepository itemRepository) {
         this.itemRepository = itemRepository;
     }
-    @Override
-    public List<Item> getItemsByCategory(Category category) {
-        return itemRepository.findByCategory(category);
-    }
 
     @Override
     public List<Item> getAllItem() {
