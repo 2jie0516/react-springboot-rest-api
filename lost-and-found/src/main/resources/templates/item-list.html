@@ -20,7 +20,6 @@
 <table class="table table-hover table-striped">
   <thead>
   <tr>
-    <th scope="col">Id</th>
     <th scope="col">Name</th>
     <th scope="col">Category</th>
     <th scope="col">Place</th>
@@ -31,10 +30,9 @@
   </thead>
   <tbody>
   <tr th:each="item: ${items}" th:object="${item}">
-    <td th:text="*{productId}"></td>
-    <td th:text="*{productName}"></td>
+    <td th:text="*{itemName}"></td>
     <td th:text="*{category}"></td>
-    <td th:text="*{place}"></td>
+    <td th:text="*{foundPlace}"></td>
     <td th:text="*{description}"></td>
     <td th:text="*{createdAt}"></td>
     <td th:text="*{updatedAt}"></td>

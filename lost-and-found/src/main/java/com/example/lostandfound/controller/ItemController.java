@@ -35,6 +35,6 @@ public class ItemController {
                 createItemRequest.category(),
                 createItemRequest.place(),
                 createItemRequest.description());
-        return "redirect:/products";
+        return "redirect:/items";
     }
 }

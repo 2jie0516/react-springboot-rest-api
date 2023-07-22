@@ -29,7 +29,7 @@ public class MemoryFoundService implements FoundService{
 
     @Override
     public Item createItem(String itemName, Category category, String place, String description) {
-        var product = new Item(UUID.randomUUID(), itemName, category, place, description);
+        var product = new Item(itemName, category, place, description);
         return itemRepository.insert(product);
     }
 }

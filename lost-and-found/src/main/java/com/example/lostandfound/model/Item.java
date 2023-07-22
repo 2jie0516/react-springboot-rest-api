@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class Item {
-    private final UUID itemId;
     private String itemName;
     private Category category;
     private final String foundPlace;
@@ -12,8 +11,7 @@ public class Item {
     private final LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public Item(UUID itemId, String itemName, Category category, String foundPlace, String description) {
-        this.itemId = itemId;
+    public Item(String itemName, Category category, String foundPlace, String description) {
         this.itemName = itemName;
         this.category = category;
         this.foundPlace = foundPlace;
@@ -22,18 +20,13 @@ public class Item {
         this.updatedAt = LocalDateTime.now();
     }
 
-    public Item(UUID itemId, String itemName, Category category, String foundPlace, String description,LocalDateTime createdAt,LocalDateTime updatedAt) {
-        this.itemId = itemId;
+    public Item(String itemName, Category category, String foundPlace, String description,LocalDateTime createdAt,LocalDateTime updatedAt) {
         this.itemName = itemName;
         this.category = category;
         this.foundPlace = foundPlace;
         this.description = description;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-    }
-
-    public UUID getItemId() {
-        return itemId;
     }
 
     public String getItemName() {

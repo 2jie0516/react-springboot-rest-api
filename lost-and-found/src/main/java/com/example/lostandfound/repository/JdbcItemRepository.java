@@ -33,8 +33,8 @@ public class JdbcItemRepository implements ItemRepository{
 
     @Override
     public Item insert(Item item) {
-        var update = jdbcTemplate.update("INSERT INTO item(item_id,item_name, category, place, description, created_at, updated_at)" +
-                " VALUES (UUID_TO_BIN(:itemId), :itemName, :category, :place, :description, :createdAt, :updatedAt)", toParamMap(item));
+        var update = jdbcTemplate.update("INSERT INTO item(item_name, category, found_place, description, created_at, updated_at)" +
+                " VALUES ( :itemName, :category, :place, :description, :createdAt, :updatedAt)", toParamMap(item));
         if (update != 1) {
             throw new RuntimeException("Noting was inserted");
         }
@@ -93,20 +93,18 @@ public class JdbcItemRepository implements ItemRepository{
     }
 
     private static final RowMapper<Item> itemRowMapper = (resultSet, i) -> {
-        var itemId = toUUID(resultSet.getBytes("product_id"));
-        var itemName = resultSet.getString("product_name");
+        var itemName = resultSet.getString("item_name");
         var category = Category.valueOf(resultSet.getString("category"));
-        var place = resultSet.getString("place");
+        var place = resultSet.getString("found_place");
         var description = resultSet.getString("description");
         var createdAt = toLocalDateTime(resultSet.getTimestamp("created_at"));
         var updatedAt = toLocalDateTime(resultSet.getTimestamp("updated_at"));
-        return new Item(itemId, itemName, category, place, description, createdAt, updatedAt);
+        return new Item(itemName, category, place, description, createdAt, updatedAt);
     };
 
     private Map<String, Object> toParamMap(Item item) {
         var paramMap = new HashMap<String, Object>();
-        paramMap.put("productId", item.getItemId().toString().getBytes());
-        paramMap.put("productName", item.getItemName());
+        paramMap.put("itemName", item.getItemName());
         paramMap.put("category", item.getCategory().toString());
         paramMap.put("place", item.getFoundPlace());
         paramMap.put("description", item.getDescription());
