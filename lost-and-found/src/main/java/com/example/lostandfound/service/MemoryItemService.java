@@ -2,20 +2,16 @@ package com.example.lostandfound.service;
 
 import com.example.lostandfound.model.Category;
 import com.example.lostandfound.model.Item;
-import com.example.lostandfound.model.Status;
 import com.example.lostandfound.repository.ItemRepository;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 @Service
-public class MemoryFoundService implements FoundService{
+public class MemoryItemService implements ItemService {
     private final ItemRepository itemRepository;
 
-    public MemoryFoundService(ItemRepository itemRepository) {
+    public MemoryItemService(ItemRepository itemRepository) {
         this.itemRepository = itemRepository;
     }
 

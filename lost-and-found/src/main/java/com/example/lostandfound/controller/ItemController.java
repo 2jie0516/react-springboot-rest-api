@@ -1,8 +1,6 @@
 package com.example.lostandfound.controller;
 
-import com.example.lostandfound.model.Status;
-import com.example.lostandfound.service.FoundService;
-import org.springframework.stereotype.Component;
+import com.example.lostandfound.service.ItemService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,9 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class ItemController {
 
-    private final FoundService itemService;
+    private final ItemService itemService;
 
-    public ItemController(FoundService itemService) {
+    public ItemController(ItemService itemService) {
         this.itemService = itemService;
     }
 
